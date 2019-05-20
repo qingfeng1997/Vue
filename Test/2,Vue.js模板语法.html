@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>v-html</title>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<style type="text/css">
+		.class1{
+			background: #444;
+			color:#eee;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p>{{ message }}</p>
+	</div>
+
+	<div id="app1">
+		  <label for="r1">修改颜色</label><input type="checkbox" v-model="use" id="r1">
+		  <br><br>
+		  <div v-bind:class="{'class1': use}">
+		    v-bind:class 指令
+		  </div>
+	</div>
+
+	<div id="app2">
+		{{5+5}}<br>
+		{{ ok ? 'YES' : 'NO'}}<br>
+		{{ message.split('').reverse().join('') }}
+		<div v-bind:id="'list-' + id">菜鸟教程</div>
+	</div>
+
+
+	<div id="app3">
+		<p v-if="seen">现在你看到我了</p>
+	</div>
+
+	<div id="app4">
+		<pre><a v-bind:href="url">菜鸟教程</a></pre>
+	</div>
+
+	<div id="app5">
+		<p>{{message}}</p>
+		<input v-model="message">
+	</div>
+
+	<div id="app6">
+		<p>{{ message }}</p>
+		<button v-on:click="reverseMessage">反转字符串</button>
+	</div>
+
+	<div id="app7">
+		{{ message | capitalize }}
+	</div>
+
+	<script type="text/javascript">
+		//v-html 
+		new Vue({
+			el:'#app',
+			data:{
+				message:'<h1>学Vue持续行动</h1>'
+			}
+		})
+		//v-bind 指令
+		new Vue({
+			el:'#app1',
+			data:{
+				use:false
+			}
+		})
+		//JavaScript表达式的支持
+		new Vue({
+			el:'#app2',
+			data:{
+				ok:true,
+				message:'RUNOOB',
+				id:1
+			}
+		})
+
+		//指令（带有v-前缀的特殊属性）
+		new Vue({
+			el:'#app3',
+			data:{
+				seen:true
+			}
+		})
+
+		//参数(参数在指令后以冒号指明。例如，v-bind指令被用来响应地更新HTML属性)
+		new Vue({
+			el:'#app4',
+			data:{
+				url:'http://www.runoob.com'
+			}
+		})
+		//双向数据绑定
+		new Vue({
+			el:'#app5',
+			data:{
+				message:'Runoob!'
+			}
+		})
+
+		//字符串反转
+		new Vue({
+			el:'#app6',
+			data:{
+				message:'niMa'
+			},
+			methods:{
+				reverseMessage:function(){
+					this.message=this.message.split('').reverse().join('')
+				}
+			}
+		})
+
+		//过滤器
+		new Vue({
+			el:'#app7',
+			data:{
+				message:'runoob'
+			},
+			filters:{
+				capitalize:function (value){
+					if (!value) return ''
+					value=value.toString()
+				    return value.charAt(0).toUpperCase() + value.slice(1)
+				}
+			}
+		})
+	</script>
+</body>
+</html>
